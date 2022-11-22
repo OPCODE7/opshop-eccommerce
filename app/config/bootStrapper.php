@@ -15,6 +15,10 @@ class Boot
         if (isset($_GET["view"]) && $_GET["view"] == "forgotPassword") {
             $view = "app/views/forgotPassword.view.php";
         }
+
+        if (isset($_GET["view"]) && $_GET["view"] == "register") {
+            $view = "app/views/register.view.php";
+        }
         return $view;
     }
 }

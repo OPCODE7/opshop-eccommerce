@@ -1,6 +1,6 @@
 <?php
-$APP_NAME = "proyectoci2";
-$APP_URL = "http://localhost/proyectoci2/";
+$APP_NAME = "eccommerce";
+$APP_URL = "http://localhost/eccommerce/";
 
 class Env
 {
@@ -8,7 +8,7 @@ class Env
 
     public function __construct()
     {
-        $this->APP_URL = "http://localhost/proyectoci2/";
+        $this->APP_URL = "http://localhost/eccommerce/";
     }
 
 
