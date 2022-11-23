@@ -39,11 +39,13 @@ class UserModel
         try {
             $rowsafected = "";
 
-            $query = "Insert into usuarios(NOMBRE,PWD,AVATAR)
-            values (:usuario,:pwd,:avatar)";
+            $query = "Insert into usuarios(NOMBRE,PWD,CORREO,ROL,AVATAR)
+            values (:usuario,:pwd,:email,:role,:avatar)";
             $stmt = $this->ConMySql->prepare($query);
             $stmt->bindParam(":usuario", $data["username"]);
-            $stmt->bindParam(":pwd", $data["password"]);
+            $stmt->bindParam(":pwd", $data["pwd"]);
+            $stmt->bindParam(":email", $data["email"]);
+            $stmt->bindParam(":role", $data["role"]);
             $stmt->bindParam(":avatar", $file);
 
 

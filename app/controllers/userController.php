@@ -3,11 +3,14 @@ class UserController
 {
 
     private $userModel;
-
+    private $Env;
     public function __construct()
     {
         require_once("app/models/userModel.php");
+        require_once("app/config/env.php");
         $this->userModel = new userModel();
+        $this->Env = new Env();
+        
     }
 
 
@@ -57,10 +60,6 @@ class UserController
             $error = "El campo contraseña es requerido";
             return $error;
         }
-        if($data["pwdconfirm"==""]){
-            $error= "El campo de confirmación para contraseña es requerido";
-            return $error;
-        }
         if($data["pwdconfirm"]!=$data["pwd"]){
             $error= "Las contraseñas no coinciden";
             return $error;
@@ -69,6 +68,10 @@ class UserController
             $error = "Seleccione un archivo!";
             return $error;
         }
+        if($data["role"]==""){
+            $error= "Seleccione el rol de usuario!!!";
+        }
+
         $type_img = $avatar["type"];
 
         if ($type_img != 'image/jpeg' && $type_img != 'image/jpg' && $type_img != 'image/gif' && $type_img != 'image/png') {
@@ -79,7 +82,7 @@ class UserController
 
         $namefile = $avatar["name"];
         $temp_name = $avatar["tmp_name"];
-        $imgserver = str_replace($forbidenchars, "", $data["ID"]) . str_replace($forbidenchars, "", $namefile);
+        $imgserver = str_replace($forbidenchars, "", $data["username"]) . str_replace($forbidenchars, "", $namefile);
         $path = "app/storage/img_users/";
         $destino = $path . $imgserver;
 

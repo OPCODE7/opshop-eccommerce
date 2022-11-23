@@ -15,25 +15,22 @@ if (isset($_POST["register"])) {
     $password = $_POST["password"];
     $passwordConfirm= $_POST["password-confirm"];
     $email = $_POST["email"];
+    $role= $_POST["role"];
 
-    if (isset($_FILES["imagen"]["name"])) {
+    if ($_FILES["imagen"]["name"]) {
         $avatar = $_FILES["imagen"];
     } else {
         $avatar = "";
     }
 
-    if (isset($_POST["role"])) {
-        $role = $_POST["role"];
-    } else {
-        $role = "";
-    }
 
     $data = [
         "username" => $username,
-        "email" => $email,
         "pwd" => $password,
         "pwdconfirm" => $passwordConfirm,
-        "role" => $role,
+        "email" => $email,
+        "avatar" => $avatar,
+        "role" => $role
     ];
 
 
@@ -59,10 +56,10 @@ if (isset($_POST["register"])) {
             <div class="col-12 col-md-8 col-lg-5 text-center">
                 <div class="card shadow bg-body rounded">
                     <div class="card-header text-start">
-                        <h5><b>Inicia Sesión</b></h5>
+                        <h5><b>Registrarse</b></h5>
                     </div>
                     <div class="card-body">
-                        <form method="POST">
+                        <form method="POST" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="mb-3">
@@ -104,10 +101,10 @@ if (isset($_POST["register"])) {
                                     <div class="mb-3">
                                         <label for="role" class="form-label d-block text-start">Rol de Usuario</label>
                                         <select id="role" class="form-select" name="role">
-                                            <option>Seleccionar rol</option>
-                                            <option>ADMIN</option>
-                                            <option>SUPER</option>
-                                            <option>USUARIO</option>
+                                            <option value="">Seleccionar rol</option>
+                                            <option value="ADMIN">ADMIN</option>
+                                            <option value="SUPER">SUPER</option>
+                                            <option value="USUARIO">USUARIO</option>
                                         </select>
                                     </div>
                                 </div>

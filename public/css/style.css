@@ -1,4 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Roboto+Condensed:wght@400;700&display=swap');
 
-.bg-gray-light{
+:root {
+    --roboto-condensed: 'Roboto Condensed', sans-serif;
+    --poppins: 'Poppins', sans-serif;
+    --primary-text-color: white;
+    --primary-bg-color: black;
+    --secondary-bg-color: rgb(17, 17, 17);
+    --hover-color: yellow;
+}
+
+body {
+    font-family: var(--poppins);
+    position: relative;
+    overflow-x: hidden;
+}
+
+.navbar-brand>img {
+    width: 50px;
+    height: 50px;
+}
+
+.navbar-nav>li {
+    font-family: var(--roboto-condensed);
+}
+
+.navbar-nav>li>a {
+    color: var(--primary-text-color);
+    margin-right: 1rem;
+}
+
+.navbar-nav>li>a:hover {
+    color: var(--hover-color);
+}
+
+.bg-gray-light {
     background-color: rgb(227, 227, 227)
+}
+
+.bg-black {
+    background-color: #000;
+}
+
+
+header>nav>.fa-bars{
+    display: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.nav-expand > .fa-close{
+    display: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.nav-expand{
+    width: 90%;
+}
+
+.nav-expand > ul{
+    flex-direction: row;
+}
+
+
+@media (max-width: 768px) {
+    .nav-expand {
+        position: absolute;
+        top: 0;
+        right: -100%;
+        transition: all 1s;
+        width: 40vh;
+        height: 100vh;
+        background-color: var(--secondary-bg-color);
+        transition: all 1s;
+        z-index: 1;
+    }
+
+    .nav-expand>ul {
+        flex-direction: column;
+        margin-top: 5rem;
+    }
+
+
+    .nav-expand>ul>li {
+        border-top: 1px solid gainsboro;
+        border-bottom: 1px solid gainsboro;
+        padding: 5px;
+        font-size: .9rem;
+    }
+
+    header>nav>.fa-bars {
+        display: block;
+        order: 1;
+    }
+
+    .nav-expand > .fa-close {
+        display: block;
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+    }
+
+    .nav-collapse {
+        right: 0;
+    }
+
 }
