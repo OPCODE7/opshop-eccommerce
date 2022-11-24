@@ -1,5 +1,10 @@
 <?php
 // session_destroy();
+require_once("app/config/routes.php");
+$route = new Routes();
+$userData =  $_SESSION["userlogged"];
+$role = $userData["role"];
+
 ?>
 
 <!DOCTYPE html>
@@ -12,15 +17,16 @@
     <link rel="stylesheet" href="<?php echo $APP_URL . "public/css/bootstrap.min.css" ?>">
     <link rel="stylesheet" href="<?php echo $APP_URL . "public/css/style.css" ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link rel="shortcut icon" href="<?php echo $APP_URL . "app/storage/img_app/opcode.ico" ?>" type="image/x-icon">
     <title>OpShop</title>
 </head>
 
 <body>
     <div class="container-fluid p-0 d-flex flex-wrap min-vh-100">
-        <header class="w-100 ">
+        <header class="w-100 h-25">
             <nav class="navbar navbar-expand-lg bg-black w-100 d-flex justify-content-between d-flex align-items-center px-3">
                 <div class="d-flex flex-row align-items-center w-50">
-                    <a class="navbar-brand" href="<?php echo $APP_URL . "home" ?>">
+                    <a class="navbar-brand" href="<?php echo $APP_URL ?>">
                         <img src="<?php echo $APP_URL . "app/storage/img_app/op-logo-white.jpg" ?>" alt="OPLOGO">
                     </a>
 
@@ -28,7 +34,7 @@
                         <span class="fas fa-close text-white fs-3"></span>
                         <ul class="navbar-nav d-flex">
                             <li class="nav-item">
-                                <a class="nav-link " href="<?php echo $APP_URL . "app/views/home" ?>">HOME</a>
+                                <a class="nav-link " href="<?php echo $APP_URL ?>">HOME</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="#">MARCAS</a>
@@ -52,13 +58,11 @@
                         <li class="nav-item">
                             <a class="nav-link fa-solid fa-heart position-relative" href="#">
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-white p-1" style="width: 1.2rem; height: 1.2rem;"><span class="text-dark">0</span></span>
-                                <!-- <span class="position-absolute" style="font-size: .9rem; top: -5px;">0</span> -->
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fa-solid fa-cart-shopping position-relative" href="#">
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-white p-1" style="width: 1.2rem; height: 1.2rem;"><span class="text-dark">0</span></span>
-                                <!-- <span class="position-absolute" style="font-size: .9rem; top: -5px;">0</span> -->
                             </a>
                         </li>
                     </ul>
@@ -66,11 +70,18 @@
                 </div>
             </nav>
         </header>
-        <main class="row w-100">
+        <main class="row w-100 mt-3" style="min-height: 75vh;">
             <div class="col-12">
                 <!-- Aqui van a ir las vistas -->
+
                 <?php
-                include "app/views/productos/save_product.view.php";
+                if (isset($_GET["view"])) {
+
+                    include $route->Request($_GET["view"]);
+                } else {
+                    include $route->Request($APP_URL . "products/list");
+                }
+
                 ?>
             </div>
         </main>

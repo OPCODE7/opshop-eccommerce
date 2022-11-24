@@ -34,7 +34,11 @@ class UserController
             $user = $data["username"];
             $pass = $data["password"];
             if ($user == $recordset["NOMBRE"] && $pass == $recordset["PWD"]) {
-                $_SESSION["userlogged"] = $user;
+                $_SESSION["userlogged"] = [
+                    "id" => $recordset["ID"],
+                    "username" => $user,
+                    "role" => $recordset["ROL"]
+                ];
                 $redirect = "http://localhost/eccommerce/";
                 header("location: $redirect");
                 $error = $user;
@@ -91,7 +95,7 @@ class UserController
         $rowsafected = $this->userModel->saveUser($data, $destino);
 
         if ($rowsafected > 0) {
-            $destino = $this->Env->Redirect("home");
+            $destino = $this->Env->Redirect("login");
             echo "<script>location.href='$destino';</script>";
         } else {
             $error = "Error al registrar cliente";

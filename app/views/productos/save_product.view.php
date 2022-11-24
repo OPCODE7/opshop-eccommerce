@@ -1,1 +1,0 @@
-<h1 class="text-primary">HOLA DESDE LA VISTA INSERTAR PRODUCTO</h1>
