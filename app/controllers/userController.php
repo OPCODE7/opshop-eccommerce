@@ -37,6 +37,7 @@ class UserController
                 $_SESSION["userlogged"] = [
                     "id" => $recordset["ID"],
                     "username" => $user,
+                    "img"=> $recordset["AVATAR"],
                     "role" => $recordset["ROL"]
                 ];
                 $redirect = "http://localhost/eccommerce/";

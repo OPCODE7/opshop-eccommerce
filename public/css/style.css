@@ -62,6 +62,10 @@ header>nav>.fa-bars{
     flex-direction: row;
 }
 
+.user-info{
+    z-index: 2;
+    width: 40vh;
+}
 
 @media (max-width: 768px) {
     .nav-expand {

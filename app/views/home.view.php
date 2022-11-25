@@ -4,7 +4,7 @@ require_once("app/config/routes.php");
 $route = new Routes();
 $userData =  $_SESSION["userlogged"];
 $role = $userData["role"];
-
+$img = $userData["img"];
 ?>
 
 <!DOCTYPE html>
@@ -50,20 +50,40 @@ $role = $userData["role"];
                 </div>
                 <i class="fa-solid fa-bars text-white"></i>
 
-                <div class="w-25">
-                    <ul class="navbar-nav w-100 d-flex flex-row justify-content-end">
-                        <li class="nav-item">
-                            <a class="nav-link fas fa-user" href="#"></a>
-                        </li>
+                <div>
+                    <ul class="navbar-nav w-100 d-flex flex-row justify-content-end d-flex align-items-center">
+
                         <li class="nav-item">
                             <a class="nav-link fa-solid fa-heart position-relative" href="#">
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-white p-1" style="width: 1.2rem; height: 1.2rem;"><span class="text-dark">0</span></span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mx-2">
                             <a class="nav-link fa-solid fa-cart-shopping position-relative" href="#">
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-white p-1" style="width: 1.2rem; height: 1.2rem;"><span class="text-dark">0</span></span>
                             </a>
+                        </li>
+                        <li class="nav-item position-relative">
+                            <img class="img-fluid rounded-circle img-user border border-2 border-white" src="<?php echo $APP_URL . $img ?>" style="width: 40px; height: 40px;cursor: pointer;"></img>
+                            <i class="fa-solid fa-angle-down text-white  "></i>
+                            <div class="card position-absolute end-50 top-100 user-info h-auto shadow-lg bg-body rounded d-none user-info">
+                                <div class="card-header">
+                                    <h5 class="text-dark">Área Personal</h5>
+                                </div>
+                                <div class="card-body d-flex align-items-center">
+                                    <img src="<?php echo $APP_URL . $img ?>" alt="user-image" style="width: 65px; height: 65px;" class="rounded-circle">
+                                    <div class="mx-3">
+                                        <h5 class="text-dark"><b><?php echo $userData["username"] ?></b></h5>
+                                        <a href="#" class="btn btn-success text-white py-1">Editar perfil</a>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    <a href="<?php echo $APP_URL?>users/logout" class="text-decoration-none text-dark">
+                                        <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
+                                        <span>Logout</span>
+                                    </a>
+                                </div>
+                            </div>
                         </li>
                     </ul>
 
@@ -103,6 +123,8 @@ $role = $userData["role"];
 
             if (e.target.matches(".fa-close"))
                 $menu.classList.remove("nav-collapse");
+
+            if (e.target.matches(".img-user")) d.querySelector(".user-info").classList.toggle("d-none");
 
         });
     </script>
