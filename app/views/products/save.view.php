@@ -1,10 +1,48 @@
 <?php
-    $name= "";
-    $description= "";
-    $image= "";
-    $brand= "";
-    $category= "";
-    $errors= "";
+
+require_once("app/controllers/productController.php");
+require_once("app/controllers/brandController.php");
+require_once("app/controllers/categoryController.php");
+
+$brandController = new brandController();
+$categoryController = new categoryController();
+
+$fetchBrands = $brandController->getBrands();
+$fetchCategories = $categoryController->getCategories();
+
+
+$productController = new productController();
+$name = "";
+$description = "";
+$price = "";
+$image = "";
+$brand = "";
+$category = "";
+$errors = "";
+
+if (isset($_POST["save"])) {
+    $name = $_POST["nameproduct"];
+    $description = $_POST["description"];
+    $price = $_POST["price"];
+    $brand = $_POST["brand"];
+    $category = $_POST["categories"];
+
+    if (isset($_FILES["file"])) {
+        $image = $_FILES["file"];
+    } else {
+        $image = "";
+    }
+
+    $data = [
+        "nameproduct" => $name,
+        "description" => $description,
+        "price" => $price,
+        "brand" => $brand,
+        "categories" => $category
+    ];
+
+    $errors = $productController->saveProduct($data, $image);
+}
 ?>
 
 
@@ -19,70 +57,89 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-6">
-                                <label for="id">Nombre del producto</label>
-                                <input type="text" name="name" class="form-control" value="<?php echo $name ?>" placeholder="Nombre del producto" maxLength="100">
+                                <label for="nameproduct" class="form-label">Nombre del producto</label>
+                                <input type="text" name="nameproduct" class="form-control" value="<?php echo $name ?>" placeholder="Nombre del producto" maxLength="20">
                             </div>
                             <div class="col-6">
-                                <label for="categoria">Marca</label>
-                                <input type="text" name="brand" placeholder="Escribir la marca" class="form-control" maxLength="200" value="<?php echo $brand ?>">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-12">
-                                <label for="direccion">Descripción</label>
-                                <textarea name="direccion" cols="30" rows="4" class="form-control" maxLength="200"><?php echo $description ?></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-6">
-                                <label for="imagen">Imagen del producto</label>
-                                <input type="file" class="form-control" name="imagen">
-                            </div>
-                            <div class="col-6">
-                                <label for="categories">Categoría del producto</label>
-                                <select name="categories" class="form-control">
-                                    <option value="">Seleccionar Categoría</option>
-                                    <option value="pc">PC</option>
-                                    <option value="desktop">Computadoras de escritorio</option>
-                                    <option value="mouse">Mouse</option>
-                                    <option value="keyboard">Teclado</option>
+                                <label for="brand" class="form-label">Marca</label>
+                                <select name="brand" class="form-control">
+                                    <option value="">Seleccionar Marca</option>
+                                    <?php
+                                    foreach ($fetchBrands as $brand) {
+                                    ?>
+                                        <option value="<?php echo $brand["ID"] ?>"><?php echo $brand["NOMBRE"] ?></option>
+                                    <?php
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="description" class="form-label">Descripción</label>
+                                <textarea name="description" cols="30" rows="4" class="form-control" maxLength="200"><?php echo $description ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="file" class="form-label">Imagen del producto</label>
+                                <input type="file" class="form-control" name="file">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="price" class="form-label">Precio del producto</label>
+                                <input type="text" class="form-control" name="price" placeholder="Precio del producto" value="<?php echo $price ?>">
+                            </div>
+                            <div class="col-6">
+                                <label for="categories" class="form-label">Categoría del producto</label>
+                                <select name="categories" class="form-control">
+                                    <option value="">Seleccionar Categoría</option>
+                                    <?php
+                                    foreach ($fetchCategories as $_category) {
+                                    ?>
+                                        <option value="<?php echo $_category["ID"] ?>"><?php echo $_category["NOMBRE"] ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
                     <?php
                     if ($errors != "") {
+
                     ?>
                         <div class="row my-2">
                             <div class="col-12">
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <strong><?php echo $errors ?></strong>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                             </div>
                         </div>
-
                     <?php
-
                     }
                     ?>
 
                     <div class="form-group  text-center mt-4">
-                        <button type="submit" name="guardar" class="btn btn-primary mr-2">
+                        <button type="submit" name="save" class="btn btn-primary mr-2">
                             <i class="fas fa-save"></i>
                             Guardar
                         </button>
-                        <a href="<?php echo $APP_URL;?>products/list" class="btn btn-warning text-light">
+                        <a href="<?php echo $APP_URL; ?>products/list" class="btn btn-warning text-light">
                             <i class="fas fa-times-circle"></i>
                             Cancelar
                         </a>

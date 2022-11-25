@@ -1,6 +1,10 @@
 <?php
 require_once("app/controllers/productController.php");
 
+$productController= new productController();
+
+$fetchProducts= $productController -> getProducts();
+
 ?>
 
 <?php
@@ -20,15 +24,21 @@ if ($role == "ADMIN" || $role === "SUPER") {
 ?>
 
 <div class="row px-4">
-    <div class="col-12 col-md-4 col-lg-3">
-        <div class="card" style="height: 60vh;">
+    <?php
+        foreach($fetchProducts as $product){
+    ?>
+    
+    <div class="col-12 col-md-4 col-lg-3 mt-2">
+        <div class="card" style="height: 65vh;">
             <div class="border-bottom" style="height: 60%;">
-                <img src="<?php echo $APP_URL . "app/storage/img_app/op-logo.jpg" ?>" class="card-img-top" alt="imagen" style="width: 100%; height: 100%;">
+                <img src="<?php echo $APP_URL . $product["IMAGENPRODUCTO"] ?>" class="card-img-top" alt="imagen" style="width: 100%; height: 100%;">
             </div>
             <div class="card-body p-3" style="height: 40%;">
-                <h5 class="card-text">Nombre del producto</h5>
-                <p class="card-text">Precio del producto</p>
-                <div class="d-flex justify-content-center">
+                <div class="h-75 ">
+                    <h5 class="card-text"><?php echo $product["NOMBRE"]?></h5>
+                    <p class="card-text"><?php echo "$".$product["PRECIO"]?></p>
+                </div>
+                <div class="d-flex justify-content-center h-25 ">
                     <a href="" class="btn btn-primary text-white">Ver más</a>
 
                     <?php
@@ -44,4 +54,7 @@ if ($role == "ADMIN" || $role === "SUPER") {
             </div>
         </div>
     </div>
+    <?php
+        }
+    ?>
 </div>

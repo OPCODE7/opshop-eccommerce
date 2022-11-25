@@ -29,6 +29,8 @@ if (isset($_POST["login"])) {
     <title>Login | OpShop</title>
     <link rel="stylesheet" href="<?php echo $APP_URL . "public/css/bootstrap.min.css" ?>">
     <link rel="stylesheet" href="<?php echo $APP_URL . "public/css/style.css" ?>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link rel="shortcut icon" href="<?php echo $APP_URL . "app/storage/img_app/opcode.ico" ?>" type="image/x-icon">
 </head>
 
 <body class="bg-light">
