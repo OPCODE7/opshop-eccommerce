@@ -45,6 +45,16 @@ $img = $userData["img"];
                             <li class="nav-item">
                                 <a class="nav-link " href="#">CONTACTO</a>
                             </li>
+                            <?php
+                            if ($role == "ADMIN" || $role == "SUPER") {
+                            ?>
+                                <li class="nav-item">
+                                    <a class="nav-link " href="#">ADMINISTRACIÓN</a>
+                                </li>
+                            <?php
+                            }
+                            ?>
+
                         </ul>
                     </div>
                 </div>
@@ -78,7 +88,7 @@ $img = $userData["img"];
                                     </div>
                                 </div>
                                 <div class="card-footer text-muted">
-                                    <a href="<?php echo $APP_URL?>users/logout" class="text-decoration-none text-dark">
+                                    <a href="<?php echo $APP_URL ?>users/logout" class="text-decoration-none text-dark">
                                         <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
                                         <span>Logout</span>
                                     </a>
@@ -90,8 +100,9 @@ $img = $userData["img"];
                 </div>
             </nav>
         </header>
-        <main class="row w-100 mt-3" style="min-height: 75vh;">
-            <div class="col-12">
+        <main class="row w-100 m-0 mb-2" style="min-height: 75vh;">
+            
+            <div class="col-12 p-0">
                 <!-- Aqui van a ir las vistas -->
 
                 <?php
