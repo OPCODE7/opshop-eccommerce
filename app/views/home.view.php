@@ -30,7 +30,7 @@ $img = $userData["img"];
                         <img src="<?php echo $APP_URL . "app/storage/img_app/op-logo-white.jpg" ?>" alt="OPLOGO">
                     </a>
 
-                    <div class="nav-expand" id="nav">
+                    <div class="nav-expand" style="z-index: 4;" id="nav">
                         <span class="fas fa-close text-white fs-3"></span>
                         <ul class="navbar-nav d-flex">
                             <li class="nav-item">

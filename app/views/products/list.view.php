@@ -56,7 +56,7 @@ if ($role == "ADMIN" || $role === "SUPER") {
     ?>
 
         <div class="col-12 col-md-4 col-lg-3 mt-2">
-            <div class="card" style="height: 65vh;">
+            <div class="card mb-2" style="height: 65vh;">
                 <div class="border-bottom" style="height: 60%;">
                     <img src="<?php echo $APP_URL . $product["IMAGENPRODUCTO"] ?>" class="card-img-top" alt="imagen" style="width: 100%; height: 100%;">
                 </div>
@@ -71,8 +71,8 @@ if ($role == "ADMIN" || $role === "SUPER") {
                         <?php
                         if ($role == "ADMIN" || $role === "SUPER") {
                         ?>
-                            <a href="#" class="btn btn-primary text-white mx-1">Editar</a>
-                            <a href="#" class="btn btn-danger text-white">Eliminar</a>
+                            <a href="<?php echo "{$APP_URL}products/edit/{$product["ID"]}"?>"   class="btn btn-success text-white mx-1">Editar</a>
+                            <a href="<?php echo "{$APP_URL}products/delete/{$product["ID"]}"?>" class="btn btn-danger text-white">Eliminar</a>
                         <?php
                         }
 

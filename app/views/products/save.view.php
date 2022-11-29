@@ -20,6 +20,9 @@ $brand = "";
 $category = "";
 $errors = "";
 
+$textBrand= "Selecionar marca";
+$textCategory= "Selecionar categoria";
+
 if (isset($_POST["save"])) {
     $name = $_POST["nameproduct"];
     $description = $_POST["description"];
@@ -27,7 +30,17 @@ if (isset($_POST["save"])) {
     $brand = $_POST["brand"];
     $category = $_POST["categories"];
 
-    if (isset($_FILES["file"])) {
+    foreach($fetchBrands as $_brand){
+
+        if($brand==$_brand["ID"]) $textBrand= $_brand["NOMBRE"];
+    }
+
+    foreach($fetchCategories as $_category){
+
+        if($category==$_category["ID"]) $textCategory= $_category["NOMBRE"];
+    }
+
+    if (($_FILES["file"]["name"])){
         $image = $_FILES["file"];
     } else {
         $image = "";
@@ -46,7 +59,7 @@ if (isset($_POST["save"])) {
 ?>
 
 
-<div class="row justify-content-center">
+<div class="row justify-content-center my-3">
     <div class="col-12 col-md-8 col-lg-6">
         <div class="card shadow-lg p-3 rounded ">
             <div class="card-header text-center  border-bottom">
@@ -61,17 +74,8 @@ if (isset($_POST["save"])) {
                                 <input type="text" name="nameproduct" class="form-control" value="<?php echo $name ?>" placeholder="Nombre del producto" maxLength="20">
                             </div>
                             <div class="col-6">
-                                <label for="brand" class="form-label">Marca</label>
-                                <select name="brand" class="form-control">
-                                    <option value="">Seleccionar Marca</option>
-                                    <?php
-                                    foreach ($fetchBrands as $brand) {
-                                    ?>
-                                        <option value="<?php echo $brand["ID"] ?>"><?php echo $brand["NOMBRE"] ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
+                                <label for="price" class="form-label">Precio del producto</label>
+                                <input type="text" class="form-control" name="price" placeholder="Precio del producto" value="<?php echo $price ?>">
                             </div>
                         </div>
                     </div>
@@ -86,7 +90,7 @@ if (isset($_POST["save"])) {
                     </div>
 
 
-                    <div class="form-group">
+                    <div class="form-group my-2">
                         <div class="row">
                             <div class="col-12">
                                 <label for="file" class="form-label">Imagen del producto</label>
@@ -98,13 +102,9 @@ if (isset($_POST["save"])) {
                     <div class="form-group">
                         <div class="row">
                             <div class="col-6">
-                                <label for="price" class="form-label">Precio del producto</label>
-                                <input type="text" class="form-control" name="price" placeholder="Precio del producto" value="<?php echo $price ?>">
-                            </div>
-                            <div class="col-6">
                                 <label for="categories" class="form-label">Categoría del producto</label>
                                 <select name="categories" class="form-control">
-                                    <option value="">Seleccionar Categoría</option>
+                                    <option value="<?php echo $brand?>"><?php echo $textCategory?></option>
                                     <?php
                                     foreach ($fetchCategories as $_category) {
                                     ?>
@@ -114,6 +114,20 @@ if (isset($_POST["save"])) {
                                     ?>
                                 </select>
                             </div>
+                            <div class="col-6">
+                                <label for="brand" class="form-label">Marca</label>
+                                <select name="brand" class="form-control">
+                                    <option value="<?php echo $brand?>"><?php echo $textBrand?></option>
+                                    <?php
+                                    foreach ($fetchBrands as $brand) {
+                                    ?>
+                                        <option value="<?php echo $brand["ID"] ?>"><?php echo $brand["NOMBRE"] ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+
 
                         </div>
                     </div>
