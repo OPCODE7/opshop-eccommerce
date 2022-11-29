@@ -67,6 +67,25 @@ header>nav>.fa-bars{
     width: 40vh;
 }
 
+.text-spacing-0{
+    letter-spacing: 0;
+}
+
+.btn-yellow{
+    background-color: var(--hover-color);
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+.item-menu-admin > a:hover{
+    color: white;
+    background-color: rgb(131, 129, 129);
+}
+
+.item-menu-admin > a{
+    color: rgb(117, 116, 116);
+}
+
 @media (max-width: 768px) {
     .nav-expand {
         position: absolute;

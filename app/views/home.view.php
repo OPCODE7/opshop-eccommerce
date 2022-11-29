@@ -1,5 +1,4 @@
 <?php
-// session_destroy();
 require_once("app/config/routes.php");
 $route = new Routes();
 $userData =  $_SESSION["userlogged"];
@@ -23,7 +22,7 @@ $img = $userData["img"];
 
 <body>
     <div class="container-fluid p-0 d-flex flex-wrap min-vh-100">
-        <header class="w-100 h-25">
+        <header class="w-100 h-25 position-sticky top-0">
             <nav class="navbar navbar-expand-lg bg-black w-100 d-flex justify-content-between d-flex align-items-center px-3">
                 <div class="d-flex flex-row align-items-center w-50">
                     <a class="navbar-brand" href="<?php echo $APP_URL ?>">
@@ -49,7 +48,7 @@ $img = $userData["img"];
                             if ($role == "ADMIN" || $role == "SUPER") {
                             ?>
                                 <li class="nav-item">
-                                    <a class="nav-link " href="#">ADMINISTRACIÓN</a>
+                                    <a class="nav-link" href="<?php echo $APP_URL?>administration">ADMINISTRACIÓN</a>
                                 </li>
                             <?php
                             }
