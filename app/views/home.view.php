@@ -1,6 +1,7 @@
 <?php
 require_once("app/config/routes.php");
 $route = new Routes();
+
 $userData =  $_SESSION["userlogged"];
 $role = $userData["role"];
 $img = $userData["img"];
@@ -22,7 +23,7 @@ $img = $userData["img"];
 
 <body>
     <div class="container-fluid p-0 d-flex flex-wrap min-vh-100">
-        <header class="w-100 h-25 position-sticky top-0">
+        <header class="w-100 h-25 position-sticky top-0" style="z-index: 5;">
             <nav class="navbar navbar-expand-lg bg-black w-100 d-flex justify-content-between d-flex align-items-center px-3">
                 <div class="d-flex flex-row align-items-center w-50">
                     <a class="navbar-brand" href="<?php echo $APP_URL ?>">
@@ -47,8 +48,33 @@ $img = $userData["img"];
                             <?php
                             if ($role == "ADMIN" || $role == "SUPER") {
                             ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo $APP_URL?>administration">ADMINISTRACIÓN</a>
+                                <!-- <li class="nav-item">
+                                    <a class="nav-link" href="<?php echo $APP_URL ?>administration">ADMINISTRACIÓN</a>
+                                </li> -->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        ADMINISTRACIÓN
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fa-solid fa-tag"></i>
+                                                <span class="mx-2">Marcas</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fa-solid fa-bars-progress"></i>
+                                                <span class="mx-2">Categorias</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="<?php echo $APP_URL ?>products/list">
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                                <span class="mx-2">Productos</span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             <?php
                             }
@@ -100,7 +126,7 @@ $img = $userData["img"];
             </nav>
         </header>
         <main class="row w-100 m-0 mb-2" style="min-height: 75vh;">
-            
+
             <div class="col-12 p-0">
                 <!-- Aqui van a ir las vistas -->
 
@@ -119,7 +145,7 @@ $img = $userData["img"];
             <small class="text-white">Desarrollado por @OpCode 2022</small>
         </footer>
     </div>
-    <script src="<?php echo $APP_URL . "public/js/bootstrap.min.js" ?>"></script>
+    <script src="<?php echo $APP_URL . "public/js/bootstrap.bundle.min.js" ?>"></script>
     <script>
         const d = document;
 
