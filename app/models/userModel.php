@@ -59,12 +59,12 @@ class UserModel
     }
 
     //GetUsers
-    public function GetUsers()
+    public function GetUsers($start,$limit)
     {
         $delete = "N";
         $estatus = "ACTIVA";
         try {
-            $query = "Select * from usuarios where DEL=:del and ESTADO=:estado";
+            $query = "Select * from usuarios where DEL=:del and ESTADO=:estado ORDER BY ID LIMIT {$start},{$limit}";
             $stmt = $this->ConMySql->prepare($query);
             $stmt->bindParam(":del", $delete);
             $stmt->bindParam(":estado", $estatus);

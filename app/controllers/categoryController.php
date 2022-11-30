@@ -12,8 +12,8 @@
             $this->Env = new Env();
         }
 
-        public function getCategories(){
-            $recordset= $this -> categoryModel -> getCategories();
+        public function getCategories($start,$limit){
+            $recordset= $this -> categoryModel -> getCategories($start,$limit);
             return $recordset;
         }
     }

@@ -9,11 +9,11 @@ class categoryModel
         $this->ConMySql = Connect::ConnectMySql();
     }
 
-    public function getCategories()
+    public function getCategories($start,$limit)
     {
         try {
             $delete = "N";
-            $query = "Select * from categorias where del=:del order by id";
+            $query = "Select * from categorias where del=:del order by id limit {$start},{$limit} ";
             $stmt = $this->ConMySql->prepare($query);
             $stmt->bindParam(":del", $delete);
 

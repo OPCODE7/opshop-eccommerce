@@ -105,9 +105,9 @@ class UserController
     }
 
     //GetUsers
-    public function GetUsers()
+    public function GetUsers($start,$limit)
     {
-        $recordset = $this->UserModel->GetUsers();
+        $recordset = $this->userModel->GetUsers($start,$limit);
         return $recordset;
     }
 

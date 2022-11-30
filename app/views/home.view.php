@@ -63,7 +63,7 @@ $img = $userData["img"];
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="<?php echo $APP_URL;?>categories/list">
                                                 <i class="fa-solid fa-bars-progress"></i>
                                                 <span class="mx-2">Categorias</span>
                                             </a>
@@ -75,7 +75,7 @@ $img = $userData["img"];
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="<?php echo $APP_URL ?>products/list">
+                                            <a class="dropdown-item" href="<?php echo $APP_URL ?>users/list">
                                                 <i class="fa-solid fa-user"></i>
                                                 <span class="mx-2">Usuarios</span>
                                             </a>
