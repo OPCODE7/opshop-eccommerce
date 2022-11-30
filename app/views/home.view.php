@@ -43,14 +43,11 @@ $img = $userData["img"];
                                 <a class="nav-link " href="#">ABOUT</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="#">CONTACTO</a>
+                                <a class="nav-link " href="<?php echo $APP_URL?>contact">CONTACTO</a>
                             </li>
                             <?php
                             if ($role == "ADMIN" || $role == "SUPER") {
                             ?>
-                                <!-- <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo $APP_URL ?>administration">ADMINISTRACIÓN</a>
-                                </li> -->
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         ADMINISTRACIÓN

@@ -3,16 +3,21 @@
 require_once("app/controllers/productController.php");
 require_once("app/controllers/brandController.php");
 require_once("app/controllers/categoryController.php");
+require_once("app/controllers/paginationController.php");
 
 $request = explode("/", $_GET["view"]);
 $id = $request[count($request) - 1];
 
+$paginationController = new paginationController();
 $brandController = new brandController();
 $categoryController = new categoryController();
 $productController = new productController();
 
-$fetchBrands = $brandController->getBrands();
-$fetchCategories = $categoryController->getCategories();
+$totalCategories= $paginationController->paginate("categorias",2);
+$totalBrands= $paginationController->paginate("marcas",2);
+
+$fetchBrands = $brandController->getBrands(0,$totalBrands + $totalBrands);
+$fetchCategories = $categoryController->getCategories(0,$totalCategories + $totalBrands);
 
 $fetchProduct = $productController->getProduct($id);
 
