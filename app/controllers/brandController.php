@@ -12,8 +12,8 @@
             $this->Env = new Env();
         }
 
-        public function getBrands(){
-            $recordset= $this -> brandModel -> getBrands();
+        public function getBrands($start,$limit){
+            $recordset= $this -> brandModel -> getBrands($start,$limit);
             return $recordset;
         }
     }

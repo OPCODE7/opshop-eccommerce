@@ -9,11 +9,11 @@ class brandModel
         $this->ConMySql = Connect::ConnectMySql();
     }
 
-    public function getBrands()
+    public function getBrands($start,$limit)
     {
         try {
             $delete = "N";
-            $query = "Select * from marcas where del=:del order by id";
+            $query = "Select * from marcas where del=:del order by id limit {$start},{$limit} ";
             $stmt = $this->ConMySql->prepare($query);
             $stmt->bindParam(":del", $delete);
 
