@@ -16,6 +16,65 @@
             $recordset= $this -> categoryModel -> getCategories($start,$limit);
             return $recordset;
         }
-    }
 
-?>
+        public function getCategory($id)
+        {
+            $category = $this->categoryModel->getCategory($id);
+            return $category;
+        }
+        public function saveCategory($data){
+            $errors= "";
+
+            if($data["namecategory"]==""){
+                $errors= "El campo nombre de la categoría es requerido";
+                return $errors;
+            }
+
+            $rowsafected = $this->categoryModel->saveCategory($data);
+
+            if ($rowsafected > 0) {
+                $destino = $this->Env->Redirect("categories/list");
+                echo "<script>location.href='$destino';</script>";
+            } else {
+                $error = "Error al registrar categoria";
+                return $error;
+            }
+
+        }
+
+        public function updateCategory($data){
+            $errors= "";
+
+            if($data["namecategory"]==""){
+                $errors= "El campo nombre de la categoría es requerido";
+                return $errors;
+            }
+
+            $rowsafected = $this->categoryModel->updateCategory($data);
+
+            if ($rowsafected > 0) {
+                $destino = $this->Env->Redirect("categories/list");
+                echo "<script>location.href='$destino';</script>";
+            } else {
+                $error = "Error al editar categoria";
+                return $error;
+            }
+
+        }
+
+        public function logicDelete($id){
+            $rowsafected=0;
+            $error="";
+            $rowsafected= $this->categoryModel->logicDelete($id);
+            if($rowsafected>0){
+                $destino= $this -> Env-> Redirect("categories/list");
+                echo "<script>location.href='$destino';</script>";
+            }else{
+            $error="Error al eliminar categoria";
+            return $error;
+            }
+    
+        }
+
+    
+    }

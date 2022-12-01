@@ -15,7 +15,25 @@ class productModel
     {
         try {
             $delete = "N";
-            $query = "Select * from productos where del=:del order by id";
+            $query = "Select * from productos where del=:del order by ID";
+            $stmt = $this->ConMySql->prepare($query);
+            $stmt->bindParam(":del", $delete);
+
+            $stmt->execute();
+
+            $recordset = $stmt->fetchAll();
+
+            return $recordset;
+        } catch (PDOException $error) {
+            $error->getMessage();
+        }
+    }
+
+    public function getProductsDel()
+    {
+        try {
+            $delete = "S";
+            $query = "Select * from productos where del=:del order by ID";
             $stmt = $this->ConMySql->prepare($query);
             $stmt->bindParam(":del", $delete);
 
@@ -128,4 +146,43 @@ class productModel
             echo $error->getMessage();
         }
     }
+
+    public function destroy($id){
+        $rowsafected=0;
+        $condition= "S";
+        try{
+            $query= "DELETE FROM productos WHERE ID=:id AND DEL=:condition";
+            $stmt= $this->ConMySql->prepare($query);
+            $stmt->bindParam(":id",$id);
+            $stmt->bindParam(":condition",$condition);
+            $stmt->execute();
+
+            $rowsafected= $stmt->rowCount();
+            return  $rowsafected;
+        }catch (PDOException $error) {
+            echo $error->getMessage();
+        }
+    }
+
+    public function recovery($id){
+        $rowsafected=0;
+        $condition= "S";
+        $del= "N";
+        try{
+            $query= "UPDATE productos SET DEL=:del WHERE ID=:id AND DEL=:condition";
+
+            $stmt= $this->ConMySql->prepare($query);
+            $stmt->bindParam(":id",$id);
+            $stmt->bindParam(":del",$del);
+            $stmt->bindParam(":condition",$condition);
+            $stmt->execute();
+
+            $rowsafected= $stmt->rowCount();
+            return  $rowsafected;
+        }catch (PDOException $error) {
+            echo $error->getMessage();
+        }
+    }
+
+
 }

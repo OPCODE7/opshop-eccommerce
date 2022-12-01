@@ -15,7 +15,6 @@ if ($totalItems == 4) {
 }
 $pages = $paginationController->paginate("usuarios", $size) + 1;
 
-echo $pages;
 $fetchUsers = $userController->getUsers($start, $size);
 
 
@@ -113,8 +112,6 @@ $fetchUsers = $userController->getUsers($start, $size);
                 for ($i = $startValueLoop; $i <= $limitValueLoop; $i++) {
                 ?>
                     <li class="page-item"><a href="<?php echo "{$APP_URL}users/list/page/{$i}" ?>" class="page-link"><?php echo $i ?></a></li>
-
-
                 <?php
                 }
                 ?>

@@ -128,7 +128,7 @@ $img = $userData["img"];
                 </div>
             </nav>
         </header>
-        <main class="row w-100 m-0 mb-2" style="min-height: 75vh;">
+        <main class="row w-100 m-0" style="min-height: 75vh;">
 
             <div class="col-12 p-0">
                 <!-- Aqui van a ir las vistas -->

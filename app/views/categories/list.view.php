@@ -9,7 +9,7 @@ $numberPage= 0;
 
 $request = explode("/", $_GET["view"]);
 $totalItems = count($request);
-if ($totalItems >= 4) {
+if ($totalItems > 3) {
     $start = $request[$totalItems - 1] * $size - $size;
     $numberPage = $request[count($request) - 1];
 }
@@ -22,11 +22,11 @@ $fetchCategories = $categoryController->getCategories($start, $size);
 
 <div class="row">
     <div class="col-12 text-end my-3 px-5">
-        <a href="<?php echo $APP_URL ?>proveedores/insertar" class="btn bg-black text-white">
+        <a href="<?php echo $APP_URL ?>categories/save" class="btn bg-black text-white">
             <span class="fas fa-plus-circle"></span>
             <span class="d-none d-md-inline">Nueva Categoría</span>
         </a>
-        <a href="<?php echo $APP_URL ?>proveedores/papelera" class="btn bg-black  text-white">
+        <a href="<?php echo $APP_URL ?>categories/papelera" class="btn bg-black  text-white">
             <span class="fas fa-trash-restore"></span>
             <span class="d-none d-md-inline">Papelera</span>
         </a>
@@ -91,7 +91,7 @@ $fetchCategories = $categoryController->getCategories($start, $size);
                 </li>
                 <?php
                 $startValueLoop= 1;
-                $limitValueLoop= $pages-1;
+                $limitValueLoop= 2;
 
                 if($numberPage>=2){
                     $startValueLoop= $numberPage;

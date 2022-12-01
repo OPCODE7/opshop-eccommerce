@@ -19,6 +19,12 @@ class productController
         return $recordset;
     }
 
+    public function getProductsDel()
+    {
+        $recordset = $this->productModel->getProductsDel();
+        return $recordset;
+    }
+
     public function getProduct($id)
     {
         $product = $this->productModel->getProduct($id);
@@ -148,5 +154,31 @@ class productController
         return $error;
         }
 
+    }
+
+    public function destroy($id){
+        $rowsafected=0;
+        $error="";
+        $rowsafected= $this->productModel->destroy($id);
+        if($rowsafected>0){
+            $destino= $this -> Env-> Redirect("products/paperbin");
+            echo "<script>location.href='$destino';</script>";
+        }else{
+        $error="Error al eliminar producto";
+        return $error;
+        }
+    }
+
+    public function recovery($id){
+        $rowsafected=0;
+        $error="";
+        $rowsafected= $this->productModel->recovery($id);
+        if($rowsafected>0){
+            $destino= $this -> Env-> Redirect("products/paperbin");
+            echo "<script>location.href='$destino';</script>";
+        }else{
+        $error="Error al recuperar producto";
+        return $error;
+        }
     }
 }

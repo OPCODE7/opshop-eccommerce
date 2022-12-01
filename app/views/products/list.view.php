@@ -39,18 +39,23 @@ if ($role == "ADMIN" || $role === "SUPER") {
 ?>
     <div class="row my-3 px-4">
         <div class="col-12 text-end">
-            <a href="<?php echo $APP_URL; ?>products/save" class="btn btn-success text-white">
-                <i class="fa-solid fa-square-plus"></i>
-                Añadir Producto
+            <a href="<?php echo $APP_URL ?>products/save" class="btn bg-black text-white">
+                <span class="fas fa-plus-circle"></span>
+                <span class="d-none d-md-inline">Nuevo Producto</span>
+            </a>
+            <a href="<?php echo $APP_URL ?>products/paperbin" class="btn bg-black  text-white">
+                <span class="fas fa-trash-restore"></span>
+                <span class="d-none d-md-inline">Papelera</span>
             </a>
         </div>
     </div>
+
 <?php
 }
 
 ?>
 
-<div class="row px-4">
+<div class="row px-3">
     <?php
     foreach ($fetchProducts as $product) {
     ?>
@@ -58,7 +63,7 @@ if ($role == "ADMIN" || $role === "SUPER") {
         <div class="col-12 col-md-4 col-lg-3 mt-2">
             <div class="card mb-2" style="height: 65vh;">
                 <div class="border-bottom" style="height: 60%;">
-                    <a href="<?php echo "{$APP_URL}products/lookProduct/{$product["ID"]}"?>" class="text-decoration-none">
+                    <a href="<?php echo "{$APP_URL}products/lookProduct/{$product["ID"]}" ?>" class="text-decoration-none">
                         <img src="<?php echo $APP_URL . $product["IMAGENPRODUCTO"] ?>" class="card-img-top" alt="imagen" style="width: 100%; height: 100%;">
                     </a>
                 </div>
@@ -68,13 +73,13 @@ if ($role == "ADMIN" || $role === "SUPER") {
                         <p class="card-text"><?php echo "$" . $product["PRECIO"] ?></p>
                     </div>
                     <div class="d-flex justify-content-center h-25 ">
-                        <a href="<?php echo "{$APP_URL}products/lookProduct/{$product["ID"]}"?>" class="btn btn-primary text-white">Ver más</a>
+                        <a href="<?php echo "{$APP_URL}products/lookProduct/{$product["ID"]}" ?>" class="btn btn-primary text-white">Ver más</a>
 
                         <?php
                         if ($role == "ADMIN" || $role === "SUPER") {
                         ?>
-                            <a href="<?php echo "{$APP_URL}products/edit/{$product["ID"]}"?>"   class="btn btn-success text-white mx-1">Editar</a>
-                            <a href="<?php echo "{$APP_URL}products/delete/{$product["ID"]}"?>" class="btn btn-danger text-white">Eliminar</a>
+                            <a href="<?php echo "{$APP_URL}products/edit/{$product["ID"]}" ?>" class="btn btn-success text-white mx-1">Editar</a>
+                            <a href="<?php echo "{$APP_URL}products/delete/{$product["ID"]}" ?>" class="btn btn-danger text-white">Eliminar</a>
                         <?php
                         }
 
