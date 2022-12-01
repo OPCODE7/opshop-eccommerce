@@ -2,10 +2,10 @@
 require_once("app/controllers/categoryController.php");
 require_once("app/controllers/paginationController.php");
 $paginationController = new paginationController();
-$size = 2;
+$size = 1;
 $start = 0;
 $categoryController = new categoryController();
-$numberPage= 0;
+$numberPage = 0;
 
 $request = explode("/", $_GET["view"]);
 $totalItems = count($request);
@@ -39,7 +39,7 @@ $fetchCategories = $categoryController->getCategories($start, $size);
         <div class="card bg-light">
             <h5 class="card-header border-bottom border-light"><strong>Categorías Registradas</strong></h5>
             <div class="card-body">
-                <table class="table table-striped table-sm table-bordered" id="marcas">
+                <table class="table table-striped table-sm table-bordered" id="categorias">
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
@@ -85,47 +85,40 @@ $fetchCategories = $categoryController->getCategories($start, $size);
                         if ($numberPage > 1 && $numberPage < $pages)
                             echo "{$APP_URL}categories/list/page/" . $numberPage - 1
                         ?>
-                    " aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
+                    ">Previous</a>
                 </li>
                 <?php
-                $startValueLoop= 1;
-                $limitValueLoop= 2;
+                $startValueLoop = 1;
+                $pages <= 6 ? $limitValueLoop = $pages : $limitValueLoop = 6;
 
-                if($numberPage>=2){
-                    $startValueLoop= $numberPage;
-                    $setLimit= $numberPage + 1;
-                    if($setLimit < $pages){
-                        $limitValueLoop= $setLimit;
-                        
-                    } else{
-                        $startValueLoop= $numberPage-1;
-                        $limitValueLoop= $numberPage;
+                if ($numberPage > 6) {
+                    $startValueLoop = $numberPage - 5;
+                    $setLimit = $numberPage + 1;
+                    if ($setLimit < $pages) {
+                        $limitValueLoop = $setLimit;
+                    } else {
+                        $startValueLoop = $numberPage - 5;
+                        $limitValueLoop = $numberPage;
                     }
-                    
                 }
 
                 for ($i = $startValueLoop; $i <= $limitValueLoop; $i++) {
                 ?>
                     <li class="page-item"><a href="<?php echo "{$APP_URL}categories/list/page/{$i}" ?>" class="page-link"><?php echo $i ?></a></li>
 
-
                 <?php
                 }
                 ?>
+
                 <li class="page-item">
                     <a class="page-link" href="
-                        <?php
-                        if ($numberPage < $pages-1)
-                            echo "{$APP_URL}categories/list/page/" . $numberPage + 1
-                        ?>
-                    " aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
+                    <?php
+                    if ($numberPage < $pages - 1)
+                        echo "{$APP_URL}categories/list/page/" . $numberPage + 1
+                    ?>
+                    ">Next</a>
                 </li>
             </ul>
         </nav>
-
     </div>
 </div>

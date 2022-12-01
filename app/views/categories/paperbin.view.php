@@ -13,7 +13,7 @@ if ($totalItems > 3) {
     $start = $request[$totalItems - 1] * $size - $size;
     $numberPage = $request[count($request) - 1];
 }
-$pages = $paginationController->paginate("categorias", $size) + 1;
+$pages = $paginationController->paginateDel("categorias", $size) + 1;
 $fetchCategories = $categoryController->getCategoriesDel($start, $size);
 
 ?>
@@ -24,7 +24,7 @@ $fetchCategories = $categoryController->getCategoriesDel($start, $size);
         <div class="card bg-light">
             <h5 class="card-header border-bottom border-light"><strong>Categorías Eliminadas</strong></h5>
             <div class="card-body">
-                <table class="table table-striped table-sm table-bordered" id="marcas">
+                <table class="table table-striped table-sm table-bordered" id="categorias">
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
@@ -35,6 +35,7 @@ $fetchCategories = $categoryController->getCategoriesDel($start, $size);
                     </thead>
                     <tbody>
                         <?php
+
                         foreach ($fetchCategories as $category) {
                         ?>
                             <tr>
@@ -54,8 +55,10 @@ $fetchCategories = $categoryController->getCategoriesDel($start, $size);
                                 </td>
                             </tr>
 
-                        <?php
+                            <?php
                         }
+
+
                         ?>
 
                     </tbody>
@@ -72,21 +75,19 @@ $fetchCategories = $categoryController->getCategoriesDel($start, $size);
                         if ($numberPage > 1 && $numberPage < $pages)
                             echo "{$APP_URL}categories/paperbin/page/" . $numberPage - 1
                         ?>
-                    " aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
+                    ">Previous</a>
                 </li>
                 <?php
                 $startValueLoop = 1;
-                $limitValueLoop = 2;
+                $pages <= 6 ? $limitValueLoop = $pages : $limitValueLoop = 6;
 
-                if ($numberPage >= 2) {
-                    $startValueLoop = $numberPage;
+                if ($numberPage > 6) {
+                    $startValueLoop = $numberPage - 5;
                     $setLimit = $numberPage + 1;
                     if ($setLimit < $pages) {
                         $limitValueLoop = $setLimit;
                     } else {
-                        $startValueLoop = $numberPage - 1;
+                        $startValueLoop = $numberPage - 5;
                         $limitValueLoop = $numberPage;
                     }
                 }
@@ -95,19 +96,17 @@ $fetchCategories = $categoryController->getCategoriesDel($start, $size);
                 ?>
                     <li class="page-item"><a href="<?php echo "{$APP_URL}categories/paperbin/page/{$i}" ?>" class="page-link"><?php echo $i ?></a></li>
 
-
                 <?php
                 }
                 ?>
+
                 <li class="page-item">
                     <a class="page-link" href="
-                        <?php
-                        if ($numberPage < $pages - 1)
-                            echo "{$APP_URL}categories/paperbin/page/" . $numberPage + 1
-                        ?>
-                    " aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
+                    <?php
+                    if ($numberPage < $pages - 1)
+                        echo "{$APP_URL}categories/paperbin/page/" . $numberPage + 1
+                    ?>
+                    ">Next</a>
                 </li>
             </ul>
         </nav>

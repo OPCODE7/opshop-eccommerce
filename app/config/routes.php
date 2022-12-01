@@ -31,7 +31,7 @@ class Routes
                     }
                 }
 
-                if ($control==0) {
+                if ($control==0 || $control==4) {
                     $response ="app/views/404.view.php";
                 }
         }

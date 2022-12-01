@@ -26,4 +26,21 @@ class paginationModel
             echo $error->getMessage();
         }
     }
+
+    public function paginateDel($tableName){
+        try{
+            $del= "S";
+            $query= "SELECT COUNT(*) AS TOTALROWS FROM {$tableName} WHERE DEL=:del";
+
+            $stmt = $this->conMySql->prepare($query);
+            $stmt->bindParam("del",$del);
+            $stmt->execute();
+
+            $rows = $stmt->fetch();
+
+            return $rows;
+        }catch(PDOException $error){
+            echo $error->getMessage();
+        }
+    }
 }

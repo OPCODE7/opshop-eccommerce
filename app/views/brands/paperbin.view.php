@@ -14,31 +14,17 @@ if ($totalItems >= 4) {
     $numberPage = $request[count($request) - 1];
 }
 $pages = round($paginationController->paginate("marcas", $size) + 1);
-$fetchBrands = $brandController->getBrands($start, $size);
-
+$fetchBrands = $brandController->getBrandsDel($start, $size);
 
 
 ?>
 
 
-<div class="row">
-    <div class="col-12 text-end my-3 px-5">
-        <a href="<?php echo $APP_URL ?>brands/save" class="btn bg-black text-white">
-            <span class="fas fa-plus-circle"></span>
-            <span class="d-none d-md-inline">Nueva Marca</span>
-        </a>
-        <a href="<?php echo $APP_URL ?>brands/paperbin" class="btn bg-black  text-white">
-            <span class="fas fa-trash-restore"></span>
-            <span class="d-none d-md-inline">Papelera</span>
-        </a>
-    </div>
-</div>
 
-
-<div class="row mb-3">
+<div class="row mt-3">
     <div class="col-12 col-lg-11 m-auto">
         <div class="card bg-light">
-            <h5 class="card-header border-bottom border-light"><strong>Marcas Registradas</strong></h5>
+            <h5 class="card-header border-bottom border-light"><strong>Marcas Eliminadas</strong></h5>
             <div class="card-body">
                 <table class="table table-striped table-sm table-bordered" id="marcas">
                     <thead>
@@ -61,11 +47,13 @@ $fetchBrands = $brandController->getBrands($start, $size);
                                 <td><?php echo $brand["REGISTRO"]; ?></td>
 
                                 <td>
-                                    <a href="<?php echo $APP_URL; ?>brands/edit/<?php echo $brand["ID"] ?>" class="btn btn-sm btn-outline-success ">
-                                        <i class="fas fa-pencil-alt"></i>
+                                    <a href="<?php echo $APP_URL; ?>brands/recovery/<?php echo $brand["ID"] ?>" class="btn btn-sm btn-outline-success ">
+                                        <i class="fa-solid fa-trash-arrow-up"></i>
+                                        Recuperar
                                     </a>
-                                    <a href="<?php echo $APP_URL; ?>brands/delete/<?php echo $brand["ID"] ?>" class="btn btn-sm btn-outline-danger mt-1 ">
+                                    <a href="<?php echo $APP_URL; ?>brands/destroy/<?php echo $brand["ID"] ?>" class="btn btn-sm btn-outline-danger mt-1 ">
                                         <i class="fas fa-trash"></i>
+                                        Eliminar
                                     </a>
                                 </td>
                             </tr>
@@ -86,13 +74,13 @@ $fetchBrands = $brandController->getBrands($start, $size);
                     <a class="page-link" href="
                         <?php
                         if ($numberPage > 1 && $numberPage < $pages)
-                            echo "{$APP_URL}brands/list/page/" . $numberPage - 1
+                            echo "{$APP_URL}brands/paperbin/page/" . $numberPage - 1
                         ?>
                     ">Previous</a>
                 </li>
                 <?php
                 $startValueLoop = 1;
-                $pages <= 6 ? $limitValueLoop = $pages-1 : $limitValueLoop = 6;
+                $pages <= 6 ? $limitValueLoop = $pages -1: $limitValueLoop = 6;
 
                 if ($numberPage > 6) {
                     $startValueLoop = $numberPage - 5;
@@ -107,7 +95,7 @@ $fetchBrands = $brandController->getBrands($start, $size);
 
                 for ($i = $startValueLoop; $i <= $limitValueLoop; $i++) {
                 ?>
-                    <li class="page-item"><a href="<?php echo "{$APP_URL}brands/list/page/{$i}" ?>" class="page-link"><?php echo $i ?></a></li>
+                    <li class="page-item"><a href="<?php echo "{$APP_URL}brands/paperbin/page/{$i}" ?>" class="page-link"><?php echo $i ?></a></li>
 
                 <?php
                 }
@@ -116,8 +104,8 @@ $fetchBrands = $brandController->getBrands($start, $size);
                 <li class="page-item">
                     <a class="page-link" href="
                     <?php
-                    if ($numberPage < $pages-1)
-                        echo "{$APP_URL}brands/list/page/" . $numberPage + 1
+                    if ($numberPage < $pages - 1)
+                        echo "{$APP_URL}brands/paperbin/page/" . $numberPage + 1
                     ?>
                     ">Next</a>
                 </li>

@@ -17,5 +17,11 @@
             $pages= $totalRows["TOTALROWS"]/$size;
             return $pages;
         }
+
+        public function paginateDel($tableName,$size){
+            $totalRows= $this->paginationModel -> paginateDel($tableName);
+            $pages= $totalRows["TOTALROWS"]/$size;
+            return $pages;
+        }
     }
 ?>

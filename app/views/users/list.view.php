@@ -5,11 +5,11 @@ $paginationController = new paginationController();
 $size = 2;
 $start = 0;
 $userController = new userController();
-$numberPage= 0;
+$numberPage = 0;
 
 $request = explode("/", $_GET["view"]);
 $totalItems = count($request);
-if ($totalItems == 4) {
+if ($totalItems > 3) {
     $start = $request[$totalItems - 1] * $size - $size;
     $numberPage = $request[count($request) - 1];
 }
@@ -19,16 +19,6 @@ $fetchUsers = $userController->getUsers($start, $size);
 
 
 ?>
-
-
-<div class="row">
-    <div class="col-12 text-end my-3 px-5">
-        <a href="<?php echo $APP_URL ?>proveedores/papelera" class="btn bg-black  text-white">
-            <span class="fas fa-trash-restore"></span>
-            <span class="d-none d-md-inline">Papelera</span>
-        </a>
-    </div>
-</div>
 
 
 <div class="row mb-3">
@@ -88,42 +78,38 @@ $fetchUsers = $userController->getUsers($start, $size);
                         if ($numberPage > 1 && $numberPage < $pages)
                             echo "{$APP_URL}users/list/page/" . $numberPage - 1
                         ?>
-                    " aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
+                    ">Previous</a>
                 </li>
                 <?php
-                $startValueLoop= 1;
-                $limitValueLoop= $pages-1;
+                $startValueLoop = 1;
+                $pages <= 6 ? $limitValueLoop = $pages : $limitValueLoop = 6;
 
-                if($numberPage>=2){
-                    $startValueLoop= $numberPage;
-                    $setLimit= $numberPage + 1;
-                    if($setLimit < $pages){
-                        $limitValueLoop= $setLimit;
-                        
-                    } else{
-                        $startValueLoop= $numberPage-1;
-                        $limitValueLoop= $numberPage;
+                if ($numberPage > 6) {
+                    $startValueLoop = $numberPage - 5;
+                    $setLimit = $numberPage + 1;
+                    if ($setLimit < $pages) {
+                        $limitValueLoop = $setLimit;
+                    } else {
+                        $startValueLoop = $numberPage - 5;
+                        $limitValueLoop = $numberPage;
                     }
-                    
                 }
 
                 for ($i = $startValueLoop; $i <= $limitValueLoop; $i++) {
                 ?>
                     <li class="page-item"><a href="<?php echo "{$APP_URL}users/list/page/{$i}" ?>" class="page-link"><?php echo $i ?></a></li>
+
                 <?php
                 }
                 ?>
+
                 <li class="page-item">
                     <a class="page-link" href="
-                        <?php
-                        if ($numberPage < $pages-1)
-                            echo "{$APP_URL}users/list/page/" . $numberPage + 1
-                        ?>
-                    " aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
+                    <?php
+                    if ($numberPage < $pages - 1)
+                        echo "{$APP_URL}users/list/page/" . $numberPage + 1
+                    ?>
+                    ">Next</a>
                 </li>
             </ul>
         </nav>

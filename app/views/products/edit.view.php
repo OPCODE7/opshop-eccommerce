@@ -65,7 +65,7 @@ if (isset($_POST["update"])) {
     <div class="col-12 col-md-8 col-lg-6">
         <div class="card shadow-lg p-3 rounded ">
             <div class="card-header text-center  border-bottom">
-                <h5><strong>Nuevo Producto</strong></h5>
+                <h5><strong>Editar Producto</strong></h5>
             </div>
             <div class="card-body">
                 <form method="POST" enctype="multipart/form-data">
