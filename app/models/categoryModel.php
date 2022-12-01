@@ -27,6 +27,24 @@ class categoryModel
         }
     }
 
+    public function getCategoriesDel($start,$limit)
+    {
+        try {
+            $delete = "S";
+            $query = "SELECT * FROM categorias  WHERE del=:del ORDER BY ID LIMIT {$start},{$limit}";
+            $stmt = $this->ConMySql->prepare($query);
+            $stmt->bindParam(":del", $delete);
+
+            $stmt->execute();
+
+            $recordset = $stmt->fetchAll();
+
+            return $recordset;
+        } catch (PDOException $error) {
+            $error->getMessage();
+        }
+    }
+
     public function getProducts()
     {
         try {
@@ -114,6 +132,44 @@ class categoryModel
         $condition= "N";
         try{
             $query= "UPDATE categorias SET DEL=:del WHERE ID=:id AND DEL=:condition";
+            $stmt= $this->ConMySql->prepare($query);
+            $stmt->bindParam(":id",$id);
+            $stmt->bindParam(":del",$del);
+            $stmt->bindParam(":condition",$condition);
+            $stmt->execute();
+
+            $rowsafected= $stmt->rowCount();
+            return  $rowsafected;
+        }catch (PDOException $error) {
+            echo $error->getMessage();
+        }
+    }
+
+    
+    public function destroy($id){
+        $rowsafected=0;
+        $condition= "S";
+        try{
+            $query= "DELETE FROM categorias WHERE ID=:id AND DEL=:condition";
+            $stmt= $this->ConMySql->prepare($query);
+            $stmt->bindParam(":id",$id);
+            $stmt->bindParam(":condition",$condition);
+            $stmt->execute();
+
+            $rowsafected= $stmt->rowCount();
+            return  $rowsafected;
+        }catch (PDOException $error) {
+            echo $error->getMessage();
+        }
+    }
+
+    public function recovery($id){
+        $rowsafected=0;
+        $condition= "S";
+        $del= "N";
+        try{
+            $query= "UPDATE categorias SET DEL=:del WHERE ID=:id AND DEL=:condition";
+
             $stmt= $this->ConMySql->prepare($query);
             $stmt->bindParam(":id",$id);
             $stmt->bindParam(":del",$del);
